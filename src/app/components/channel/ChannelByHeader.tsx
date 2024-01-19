@@ -3,7 +3,8 @@
 import React, { useContext } from 'react'
 import {Channel}from "@prisma/client"
 import { CurrentUserContext } from '@/app/context/CurrentUserContext';
-import {Avatar, AvatarSize } from '../shared/Avatar';
+import { AvatarSize } from '../shared/Avatar';
+import Avatar from '../shared/Avatar';
 import { compactNumberFormat } from '@/app/utils/numUtils';
 import Link from 'next/link';
 import Button from '../shared/Button';
