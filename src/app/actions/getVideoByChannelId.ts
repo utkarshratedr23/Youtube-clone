@@ -11,7 +11,7 @@ try{
   if(channelId){
     query.channelId=channelId
   }
-  const videos=await prisma.video.findFirst({
+  const videos=await prisma.video.findMany({
     where:query
   })
   return videos || [];

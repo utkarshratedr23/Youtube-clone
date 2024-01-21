@@ -8,6 +8,7 @@ import Avatar from '../shared/Avatar';
 import { compactNumberFormat } from '@/app/utils/numUtils';
 import Link from 'next/link';
 import Button from '../shared/Button';
+import SubscribedButton from '../shared/SubscribedButton';
 interface ChannelHeaderProps{
  channel:Channel;
  videoCount:number
@@ -27,7 +28,7 @@ const ChannelByHeader:React.FC<ChannelHeaderProps> = ({channel,videoCount}) => {
             {`${compactNumberFormat(channel.subscriberCount)} subscribers`}
         </p>
         <p>
-            {`${compactNumberFormat(channel.videoCount)} videos`}
+            {`${compactNumberFormat(videoCount)} videos`}
         </p>
      </div>
       </div>
@@ -37,7 +38,7 @@ const ChannelByHeader:React.FC<ChannelHeaderProps> = ({channel,videoCount}) => {
                 <Button type='rounded-dark'>Manage Videos</Button>
             </Link>
         ):(
-            <div>Subscribe</div>
+           <SubscribedButton channelId={channel.id}/>
         )
       }
     </div>

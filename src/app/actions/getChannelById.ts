@@ -9,7 +9,7 @@ try{
   const {channelId}=params;
   const query:any={}
   if(channelId){
-    query.channelId=channelId
+    query.id=channelId
   }
   const channel=await prisma.channel.findFirst({
     where:query
