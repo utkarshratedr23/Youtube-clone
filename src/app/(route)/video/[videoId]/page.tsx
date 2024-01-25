@@ -1,4 +1,5 @@
 import GetChannelById from "@/app/actions/getChannelById";
+import getCommentByVideoId from "@/app/actions/getCommentsByVideoId";
 import IncreaseVideoViewCount from "@/app/actions/increaseVideoViewCount";
 import Description from "@/app/components/video/Description";
 import LikeSubscribeSection from "@/app/components/video/LikeSubscribeSection/LikeSubscribeSection";
@@ -12,6 +13,9 @@ export default async function VideoPage({params}:{params:VideoPageParams})
     const {videoId}=params;
     const video=await IncreaseVideoViewCount({videoId})
     const channel=await GetChannelById({channelId:video?.channelId})
+    const comments=await getCommentByVideoId({
+        videoId,
+    })
     return video && channel?(
         <div className="flex flex-col lg:flex-row mx-6 mt-2 gap-4">
             <div className="w-full lg:w-3/4 flex flex-col gap-4">
