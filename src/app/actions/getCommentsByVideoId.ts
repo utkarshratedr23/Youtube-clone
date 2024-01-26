@@ -1,11 +1,11 @@
-import { Comment } from "@prisma/client";
+import { Comment,Channel } from "@prisma/client";
 import prisma from "../../../vendor/db";
 
 interface GetCommentByVideoIdParams{
     videoId?:String
 }
 export default async function getCommentByVideoId(params:GetCommentByVideoIdParams)
-:Promise<(Comment & {channel:channel})[] | null>{
+:Promise<(Comment & {channel:Channel})[] | null>{
     try{
      const {videoId}=params;
      const query:any={}
