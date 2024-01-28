@@ -1,9 +1,35 @@
 "use client"
-import React from 'react'
-
-const AnalyticsSummary = () => {
+import { CurrentChannelContext } from '@/app/context/CreateChannelContext';
+import { useProtectedRoute } from '@/app/hooks/useProtectedRoute';
+import { Video } from '@prisma/client'
+import React, { useContext, useMemo } from 'react'
+import Avatar, { AvatarSize } from '../shared/Avatar';
+import AnalyticsSummaryItem from './AnalyticsSummaryItem';
+import { compactNumberFormat } from '@/app/utils/numUtils';
+interface AnalyticsSummaryProps{
+    videos:Video[];
+}
+const AnalyticsSummary:React.FC<AnalyticsSummaryProps> = ({videos}) => {
+    useProtectedRoute();
+    const currentChannel=useContext(CurrentChannelContext)
+   const viewsCount=useMemo(()=>videos?.reduce((totalViews,video)=>totalViews+ video.viewCount,0)
+ ,[videos])
   return (
-    <div>AnalyticsSummary</div>
+    <div className='mx-auto flex items-center gap-4'>
+        <Avatar size={AvatarSize.large} imageSrc={currentChannel?.imageSrc} 
+        className='hidden md:inline'/>
+         <div className='grid grid-cols-2 md:grid-cols-4 gap-4'>
+            <AnalyticsSummaryItem value={currentChannel?.name}
+            subtitle={`@${currentChannel?.handle}`}/>
+            <AnalyticsSummaryItem value={compactNumberFormat(currentChannel?.subscriberCount)}
+            subtitle="Subscribers"/>
+            <AnalyticsSummaryItem value={compactNumberFormat(viewsCount)}
+            subtitle="Views"/>
+            <AnalyticsSummaryItem value={compactNumberFormat(videos.length)}
+            subtitle="Videos"/>
+         </div>
+    </div>
+   
   )
 }
 
