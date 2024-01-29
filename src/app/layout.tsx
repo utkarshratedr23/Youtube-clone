@@ -1,3 +1,4 @@
+"use client"
 import './globals.css'
 import type { Metadata } from 'next'
 import { Roboto } from 'next/font/google'
@@ -9,6 +10,9 @@ import CreateChannelModal from './components/Modal/CreateChannelModal'
 import { Toaster } from 'react-hot-toast'
 import getCurrentChannel from './actions/getCurrentChannel'
 import CurrentChannelProvider from './context/CreateChannelContext'
+import UploadVideoModalProvider from './context/UploadVideoModalContext'
+import SideBar from './components/shared/Navigation/Sidebar/SideBar'
+import SidebarProvider from './context/SidebarContext'
 const roboto = Roboto({ 
 subsets: ['latin'] ,
 weight: ["100" , "300" ,"400" , "500" ,"700" , "900" ]})
@@ -35,9 +39,13 @@ export default async function RootLayout({
           <CreateChannelModal/>
         <CurrentUserProvider user={currentUser}>
           <CurrentChannelProvider channel={currentChannel}>
-          <Navigation/>
+            <UploadVideoModalProvider>
+              <SidebarProvider>
+            <Navigation/>
           <div className='pt-16'>{children}
           </div>
+          </SidebarProvider>
+            </UploadVideoModalProvider>
           </CurrentChannelProvider>
          
           </CurrentUserProvider>
