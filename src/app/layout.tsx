@@ -1,4 +1,3 @@
-"use client"
 import './globals.css'
 import type { Metadata } from 'next'
 import { Roboto } from 'next/font/google'
@@ -11,7 +10,6 @@ import { Toaster } from 'react-hot-toast'
 import getCurrentChannel from './actions/getCurrentChannel'
 import CurrentChannelProvider from './context/CreateChannelContext'
 import UploadVideoModalProvider from './context/UploadVideoModalContext'
-import SideBar from './components/shared/Navigation/Sidebar/SideBar'
 import SidebarProvider from './context/SidebarContext'
 const roboto = Roboto({ 
 subsets: ['latin'] ,
@@ -25,33 +23,28 @@ export const metadata: Metadata = {
 export default async function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
-  const currentUser=await getCurrentUser();
-  const currentChannel=await getCurrentChannel();
+  const currentUser = await getCurrentUser();
+  const currentChannel = await getCurrentChannel();
+
   return (
     <html lang="en">
       <body className={roboto.className}>
         <CreateChannelModalProvider>
-          <Toaster toastOptions={{
-            position:'bottom-left'
-          }}/>
-          <CreateChannelModal/>
-        <CurrentUserProvider user={currentUser}>
-          <CurrentChannelProvider channel={currentChannel}>
-            <UploadVideoModalProvider>
-              <SidebarProvider>
-            <Navigation/>
-          <div className='pt-16'>{children}
-          </div>
-          </SidebarProvider>
-            </UploadVideoModalProvider>
-          </CurrentChannelProvider>
-         
+          <Toaster toastOptions={{ position: "bottom-left" }} />
+          <CreateChannelModal />
+          <CurrentUserProvider user={currentUser}>
+            <CurrentChannelProvider channel={currentChannel}>
+              <UploadVideoModalProvider>
+                <SidebarProvider>
+                  <Navigation />
+                  <div className="pt-16">{children}</div>
+                </SidebarProvider>
+              </UploadVideoModalProvider>
+            </CurrentChannelProvider>
           </CurrentUserProvider>
         </CreateChannelModalProvider>
-        
-          </body>
+      </body>
     </html>
-  )
-}
+  )}

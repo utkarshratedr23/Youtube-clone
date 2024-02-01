@@ -70,7 +70,7 @@ const VideoCard: React.FC<VideoCardProps> = ({
             ) : null}
             <p className="text-neutral-400 text-sm">
               {compactNumberFormat(video.viewCount)} views •{" "}
-              {dayjs(video.createdAt).fromNow()}
+              
             </p>
             {includeDescription ? (
               <div className="whitespace-pre-line text-sm text-neutral-400">

@@ -1,9 +1,9 @@
-"use client"
+"use client";
 
 import Button from "@/app/components/shared/Button";
 import UploadVideoModal from "@/app/components/Modal/UploadVideoModal";
-import VideoPreview from "./upload/VideoPreview";
-import VideoUploadForm from "./upload/VideoUploadForm";
+import VideoPreview from "@/app/components/studio/upload/VideoPreview";
+import VideoUploadForm from "@/app/components/studio/upload/VideoUploadForm";
 import { UploadVideoModalContext } from "@/app/context/UploadVideoModalContext";
 import { useRouter } from "next/navigation";
 import { useContext, useEffect, useMemo, useState } from "react";

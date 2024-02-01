@@ -1,23 +1,72 @@
 import getCurrentChannel from "@/app/actions/getCurrentChannel";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import prisma from "../../../../vendor/db";
-export async function POST(request:Request){
-    const currentChannel=getCurrentChannel();
-    if(!currentChannel){
-        return NextResponse.error();
-    }
-    
-        const {id,title,description,videoSrc,thumbnailSrc}=await request.json()
-   
-    const video=await prisma.video.create({
-        data:{
-            title,
-            description,
-            videoSrc,
-            id,
-            thumbnailSrc,
-            channelId:currentChannel?.id,
+
+
+export async function GET(request: NextRequest) {
+    const searchQuery = request.nextUrl.searchParams.get("searchQuery");
+  
+    if (!searchQuery) return NextResponse.error();
+  
+    const videos = await prisma.video.aggregateRaw({
+      pipeline: [
+        {
+          $search: {
+            index: "default",
+            text: {
+              query: searchQuery,
+              path: {
+                wildcard: "*",
+              },
+            },
+          },
         },
-    })
-    return NextResponse.json(video)
-}
+        {
+          $lookup: {
+            from: "Channel",
+            localField: "channelId",
+            foreignField: "_id",
+            as: "channel",
+          },
+        },
+        {
+          $project: {
+            _id: 0,
+            id: { $toString: "$_id" },
+            title: 1,
+            description: 1,
+            createdAt: { $dateToString: { date: "$createdAt" } },
+            thumbnailSrc: 1,
+            viewCount: 1,
+            channel: { $arrayElemAt: ["$channel", 0] },
+          },
+        },
+      ],
+    });
+  
+    return NextResponse.json(videos);
+  }
+  
+  export async function POST(request: Request) {
+    const currentChannel = await getCurrentChannel();
+  
+    if (!currentChannel) {
+      return NextResponse.error();
+    }
+  
+    const { id, title, description, videoSrc, thumbnailSrc } =
+      await request.json();
+  
+    const video = await prisma.video.create({
+      data: {
+        title,
+        description,
+        videoSrc,
+        thumbnailSrc,
+        id,
+        channelId: currentChannel?.id,
+      },
+    });
+  
+    return NextResponse.json(video);
+  }

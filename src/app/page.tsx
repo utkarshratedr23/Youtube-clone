@@ -1,5 +1,5 @@
 import getTrendingVideos from "./actions/getTrendingVideos"
-import VideoCard from "./components/channel/VideoCard";
+import VideoCard from "./components/shared/VideoCard";
 
 
 export default async function Home() {
