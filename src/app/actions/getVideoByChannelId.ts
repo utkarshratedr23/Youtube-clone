@@ -3,7 +3,7 @@ import { Video } from "@prisma/client";
 interface GetVideosByChannelIdParams{
     channelId?:string
 }
-export default async function GetVideosByChannelById(params:GetVideosByChannelIdParams)
+export default async function getVideosByChannelById(params:GetVideosByChannelIdParams)
 :Promise<Video[]>{
 try{
   const {channelId}=params;

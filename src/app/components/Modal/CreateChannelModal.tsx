@@ -55,17 +55,20 @@ setValue}=useForm<FieldValues>({
         <Button type="primary">Upload Picture</Button>
         </MediaUpload>
         
-        <Input 
-        id="name"
-         label="Name" 
-        /* disabled={isLoading}*/
+        <Input
+          id="name"
+          label="Name"
+          disabled={isLoading}
           register={register}
-           errors={errors}
-           pattern={{
-            value:/^[a-zA-Z0-9]*$/,
-            message:"Invalid name format"
-           }}/>
-           <Input
+          errors={errors}
+          pattern={{
+            value: /^[a-zA-Z0-9 ]*$/,
+            message: "Invalid name format",
+          }}
+          required
+          className="w-3/4"
+        />
+        <Input
           id="handle"
           label="Handle"
           disabled={isLoading}

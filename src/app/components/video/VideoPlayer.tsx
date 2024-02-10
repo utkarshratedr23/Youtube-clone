@@ -15,6 +15,7 @@ interface VideoPlayerProps {
 }
 
 const VideoPlayer: React.FC<VideoPlayerProps> = ({ videoSrc }) => {
+  console.log("Video Source:", videoSrc);
   const videoRef = useRef<HTMLVideoElement>(null);
   const timelineRef = useRef<HTMLDivElement>(null);
 
@@ -133,17 +134,18 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ videoSrc }) => {
 
   const handleTimeUpdate = useCallback(
     (e: React.MouseEvent<HTMLElement>) => {
-      if (!timelineRef.current) return;
+      
+    if (!timelineRef.current || !videoRef.current || isNaN(videoRef.current.duration)) return;
 
       const timelineBounds = timelineRef.current.getBoundingClientRect();
       const clickPosition = e.clientX;
 
       const timeWidth = clickPosition - timelineBounds?.left;
       const timelineWidth = timelineBounds.right - timelineBounds.left;
-
+      if (timelineWidth <= 0) return;
       const durationFraction = timeWidth / timelineWidth;
-
-      if (videoRef.current)
+        
+      if (videoRef?.current)
         videoRef.current.currentTime =
           durationFraction * videoRef.current.duration;
     },

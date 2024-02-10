@@ -1,13 +1,14 @@
 import React from "react";
 import Navbar from "./Navbar/Navbar";
-import SideBar from "./Sidebar/SideBar";
+import Sidebar from "./Sidebar/SideBar";
+import getCurrentSubscriptions from "@/app/actions/getCurrentSubscriptions";
 
 
 const Navigation = async () => {
-
+  const subscriptions=await getCurrentSubscriptions();
   return (
     <>
-      <SideBar subscribedChannels={[]}/>
+      <Sidebar subscribedChannels={subscriptions}/>
       <Navbar />
     </>
   );

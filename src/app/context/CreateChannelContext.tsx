@@ -2,10 +2,11 @@
 
 import { Channel } from "@prisma/client"
 import { createContext } from "react"
-import { CurrentUserContext } from "./CurrentUserContext";
+
 
  export const CurrentChannelContext=
  createContext<Channel| null>(null);
+
  interface CurrentChannelProviderProps{
     channel:Channel | null;
  }

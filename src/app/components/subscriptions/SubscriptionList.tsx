@@ -2,7 +2,7 @@
 import { useProtectedRoute } from '@/app/hooks/useProtectedRoute';
 import { Channel, Video } from '@prisma/client'
 import React from 'react'
-import VideoCard from '../channel/VideoCard';
+import VideoCard from '../shared/VideoCard';
 import { channel } from 'diagnostics_channel';
 interface SubscriptionsListProps{
     videos:(Video &{channel:Channel})[];
