@@ -16,7 +16,7 @@ model User{
   emailVerified DateTime
   image String?
   createdAt DateTime @default(now())
-  subscribedChannelsIds String[] @db.ObjectId
+  subscribedChannelIds String[] @db.ObjectId
   likedVideoIds String[] @db.ObjectId
   dislikedVideosIds String[] @db.ObjectId
 
