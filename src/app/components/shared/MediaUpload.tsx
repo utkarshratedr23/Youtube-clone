@@ -1,11 +1,13 @@
 "use client"
 import React from 'react'
 import { CldUploadWidget } from 'next-cloudinary'
+
 declare global{
     var cloudinary:any
 }
 interface MediaUploadProps{
     onChange:(value:string)=>void
+
 }
 const MediaUpload:React.FC<React.PropsWithChildren<MediaUploadProps>>= ({
     onChange,children

@@ -23,13 +23,13 @@ const Sidebar: React.FC<SidebarProps> = ({ subscribedChannels }) => {
     const handleItemClick = (onClick: () => void) => {
       onClick();
       sidebar?.onClose();
-      sidebar?.onOpen();
+      
     };
     return (
       <>
         {sidebar?.isOpen && (
           <div
-            className={`bg-blue bg-opacity-50 h-screen w-screen fixed z-30`}
+            className={`bg-black bg-opacity-50 h-screen w-screen fixed z-30`}
             onClick={() => sidebar.onClose()}
           />
         )}
@@ -77,6 +77,7 @@ const Sidebar: React.FC<SidebarProps> = ({ subscribedChannels }) => {
                         router.push(`/channel/${subscribedChannel.id}`)
                       )
                     }
+                    
                   />
                 );
               })}

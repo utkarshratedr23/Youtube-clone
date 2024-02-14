@@ -7,7 +7,7 @@ import CommentSection from "@/app/components/video/CommentSection/CommentSection
 import Description from "@/app/components/video/Description";
 import LikeSubscribeSection from "@/app/components/video/LikeSubscribeSection/LikeSubscribeSection";
 import VideoPlayer from "@/app/components/video/VideoPlayer";
-
+import Scrollbar from "@/app/components/shared/Scrollbar";
 interface VideoPageParams{
     videoId?:string
 }
@@ -17,7 +17,9 @@ export default async function VideoPage({
     params: VideoPageParams;
   }) {
     const { videoId } = params;
-  
+    
+
+   
     const video = await increaseVideoViewCount({ videoId });
     const channel = await getChannelById({ channelId: video?.channelId });
     const comments = await getCommentByVideoId({
@@ -25,8 +27,9 @@ export default async function VideoPage({
     });
     const recommendedVideos = await getRecommendedVideos({ video });
   
-    return video && channel && comments ? (
-      <div className="flex flex-col lg:flex-row mx-6 mt-2 gap-4">
+    return( <Scrollbar>
+      {video && channel && comments ? (
+      <div className={`flex flex-col lg:flex-row mx-6 mt-2 gap-4`}>
         <div className="w-full lg:w-3/4 flex flex-col gap-4">
           <VideoPlayer videoSrc={video.videoSrc} />
           <h1 className="text-2xl font-medium break-all">{video.title}</h1>
@@ -52,5 +55,8 @@ export default async function VideoPage({
       </div>
     ) : (
       <h1>Video not found</h1>
-    );
+    )
   }
+    </Scrollbar>
+    )}
+    

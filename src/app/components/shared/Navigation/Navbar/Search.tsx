@@ -19,6 +19,7 @@ const Search = () => {
         skipNull:true
       })
       router.push(url);
+      setText("");
     }
   return (
     <form className='flex flex-row border-[1px] border-neutral-700 rounded-full overflow-hidden w-2/5'
@@ -29,7 +30,7 @@ const Search = () => {
         value={text}
         />
         <button type='submit'>
-            <MdOutlineSearch className='px-3 bg-white border-none'/>
+            <MdOutlineSearch className='px-3 bg-neutral-800 border-none'/>
         </button>
     </form>
   )

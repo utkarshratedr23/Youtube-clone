@@ -1,7 +1,7 @@
 import { useRouter } from "next/navigation"
 import { useCallback, useContext, useMemo } from "react"
 import { CurrentUserContext } from "../context/CurrentUserContext"
-import toast, { Toast } from "react-hot-toast"
+import toast from "react-hot-toast"
 import axios from "axios"
 interface UseSubscribeProps{
     channelId:string
@@ -29,9 +29,7 @@ export const useSubscribe=({channelId}:UseSubscribeProps)=>{
     }
     else{
         await axios.post("/api/users/subscriptions",{
-            data:{
-                channelId
-            }
+            channelId,
         })
     }
     router.refresh()
