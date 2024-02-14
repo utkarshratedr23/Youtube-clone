@@ -62,7 +62,7 @@ model Video{
   likeCount Int @default(0)
   dislikeCount Int @default(0)
   viewCount Int @default(0)
-  createdId DateTime @default(now())
+  createdAt DateTime @default(now())
   thumbnailSrc String
   videoSrc String
   channel Channel @relation(fields: [channelId],references: [id],onDelete:Cascade)
@@ -74,7 +74,7 @@ model Comment{
   videoId String @db.ObjectId
   channelId String @db.ObjectId
   text String
-  createdId DateTime @default(now())
+  createdAt DateTime @default(now())
   video Video @relation(fields: [videoId], references:[id],onDelete:Cascade)
   channel Channel @relation(fields:[channelId],references: [id],onDelete:Cascade)
 }
