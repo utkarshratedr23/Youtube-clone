@@ -3,6 +3,7 @@ import prisma from "../../../vendor/db";
 
 interface GetCommentsByVideoIdParams {
   videoId?: string;
+  [others: string]: any;
 }
 
 export default async function getCommentsByVideoId(
