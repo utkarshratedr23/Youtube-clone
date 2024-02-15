@@ -9,14 +9,14 @@ export const authOptions: AuthOptions = {
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID as string,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET as string
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
     }),
   ],
   pages: {
     signIn: "/",
   },
   debug: process.env.NODE_ENV === "development",
- 
+  
   session: {
     strategy: "jwt",
   },
@@ -24,5 +24,5 @@ export const authOptions: AuthOptions = {
 };
 
 const handler = NextAuth(authOptions);
-console.log("Debug information",authOptions.debug)
+
 export { handler as GET, handler as POST };
