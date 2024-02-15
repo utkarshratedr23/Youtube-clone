@@ -49,7 +49,6 @@ handle String
 imageSrc String
 createdAt DateTime @default(now())
 subscriberCount Int @default(0)
-videoCount Int @default(0)
 user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 comments Comment[]
 videos Video[]
